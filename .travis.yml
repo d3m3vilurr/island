@@ -20,6 +20,8 @@ script:
   - ISLAND_LOGGER_LEVEL=crit npm run coverage
 
 after_script:
+  - echo "haha"
   - npm i coveralls && cat ./coverage/lcov-remap.info | coveralls
+  - echo "hehe"
   - npm i codeclimate-test-reporter && CODECLIMATE_REPO_TOKEN=9659b75eb35f7695fcbf58818e218f069a9a681206a9c9ea331e8b30fa386336 codeclimate-test-reporter < ./coverage/lcov-remap.info
 
