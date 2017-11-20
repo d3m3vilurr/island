@@ -26,6 +26,7 @@ export class AmqpChannelPoolService {
   private openChannels: amqp.Channel[] = [];
   private idleChannels: ChannelInfo[] = [];
   private initResolver: Bluebird.Resolver<void>;
+  private isPurged: boolean = false;
 
   constructor() {
     this.initResolver = Bluebird.defer<void>();
@@ -55,6 +56,8 @@ export class AmqpChannelPoolService {
   }
 
   async purge(): Promise<void> {
+    if (!this.isPurged) return;
+    this.isPurged = true;
     return this.connection.close();
   }
 
